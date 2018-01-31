@@ -1,44 +1,64 @@
 <?php
-////////////// 3 ////////////////////
-
-//запоминаем название контроллера и экшена
-if (empty($_POST['controllerName']) && empty($_POST['actionName']))
-{
-    $controllerName = $_GET['controllerName'];
-    $actionName = $_GET['actionName'];
-}
-else
-{
-    $controllerName = $_POST['controllerName'];
-    $actionName = $_POST['actionName'];
-}
-
-//коннектимся
-require_once("../components/connect.php");
+require_once(ROOT.'/components/connect.php');
 
 class Router
 {
-    public $controllerName;
-    public $actionName;
+    private $routes;
+
+    public function __construct()
+    {
+        $routesPath = ROOT.'/config/routes.php';
+        $this->routes = include($routesPath);
+    }
+
+    private function getURL()
+    {
+        if (empty($_POST['qqq']))
+        {
+            if (!empty($_SERVER['REQUEST_URI']))
+            {
+                return trim($_SERVER['REQUEST_URI']);
+            }
+        }
+        else
+        {
+            return $_POST['qqq'];
+        }
+    }
 
     public function run()
     {
-        //генерим навзание подключаемого контроллера (в нашем случае это TableController.php)
-        require_once('../controllers/'.$this->controllerName.'.php');
+        $uri = $this->getURL();
 
-        //создаем объект с классом $controllerName (в нашем случае это TableController)
-        $controllerObject = new $this->controllerName;
-        //Выбираем экшен $actionName (в нашем случае, это actionYch)
-        $actionName = $this->actionName;
-        $result = $controllerObject->$actionName();
+        foreach ($this->routes as $uriPattern => $path)
+        {
+            if(preg_match("|$uriPattern|", $uri))
+            {
+                $seg = explode('/', $path);
+
+                $controllerName = array_shift($seg).'Controller';
+                $actionName = 'action'.array_shift($seg);
+
+                if (file_exists(ROOT.'/controllers/'.$controllerName.'.php'))
+                {
+                    require_once(ROOT.'/controllers/'.$controllerName.'.php');
+                }
+                else
+                {
+                    echo 'нет такого файла';
+                }
+
+                $controllerObject = new $controllerName;
+                $result = $controllerObject->$actionName();
+
+                if ($result != null)
+                {
+                    break;
+                }
+            }
+        }
     }
 }
 
-//создаём объект класса Router и запускаем им всю остальную кашу
-$router = new Router();
-$router->controllerName = $controllerName;
-$router->actionName = $actionName;
-$router->run();
-
-// переходим в файл controllers/TableController.php
+// переходим в файл controllers/TableController.php*/
 ?>
