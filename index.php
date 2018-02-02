@@ -9,7 +9,9 @@ include ('plug_in_file.php');
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-//контейнер для контента
-echo '<div id="content"></div>';
-//идём в components/Router.js
+define('ROOT', dirname(__FILE__));
+require_once (ROOT.'/components/Router.php');
+
+$router = new Router();
+$router -> run();
 ?>

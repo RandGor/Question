@@ -2,7 +2,7 @@
 //////////////////// 4 ////////////////////////
 
 //подключаем модель
-require_once('../models/Table.php');
+require_once(ROOT.'/models/Table.php');
 //идём в файл models/Table.php
 
 class TableController
@@ -13,8 +13,9 @@ class TableController
         $myTable = Table::getMyTable();
 
         //подключаем нужный view в зависимости от данных о размере экрана, полученных от Router.js
-        require_once ('../views/table/'.$_GET['size'].'/index.php');
+        require_once (ROOT.'/views/table/big/index.php');
         //идём в файл view/big иди /small/index.php
+        return true;
     }
 
     public function actionAdd()
@@ -27,6 +28,5 @@ class TableController
         Table::editYch();
     }
 }
-
 
 ?>

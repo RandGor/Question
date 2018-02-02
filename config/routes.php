@@ -1,8 +1,9 @@
 <?php
 
-echo json_encode(array
+return array
 (
     'table' => 'Table/Ych',
-));
+    'error' => 'Error/Error',
+);
 
 ?>

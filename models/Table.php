@@ -20,7 +20,7 @@ class Table
     {
         DB::getInstance();
 
-        $result=DB::query("INSERT INTO `ych` SET `class`='{$_POST['add_class']}', `name`='{$_POST['add_fio']}', `money`='{$_POST['add_money']}', `birthday`='{$_POST['add_birthday']}'");
+        //$result=DB::query("INSERT INTO `ych` SET `class`='{$_POST['add_class']}', `name`='{$_POST['add_fio']}', `money`='{$_POST['add_money']}', `birthday`='{$_POST['add_birthday']}'");
     }
 
     public static function editYch()

@@ -1,8 +1,4 @@
 <?php
-//подключается шапка сайта
-require_once ('../template/header.php');
-echo '<div style="height:60px;"></div>';
-
 //собственно сама таблица
 echo '<table id="tab">
         <tr>

@@ -5,6 +5,5 @@
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous">
 </script>
-<script src="components/Router.js"></script>
 
 <script src="views/table/index.js"></script>

@@ -114,8 +114,9 @@ function sel_blur(e)
 function add_ych()
 {
     //проверка валидностей заполненных полей
-    valid = true;
+    //valid = true;
 
+    /*
     if (document.add_form.add_class.options[document.add_form.add_class.selectedIndex].value=='0')
     {
         document.getElementById('err_class').innerHTML = 'Не выбран класс';
@@ -176,22 +177,22 @@ function add_ych()
             add_birthday = document.add_form.add_birthday.value;
 
         }
-    }
+    }*/
 
-    if (valid == true)
-    {
+    //if (valid == true)
+    //{
         //если всё ок, отправялем ajax, с целью занесения новых данных в БД
         $.ajax({
-            url:'components/Router.php',
+            url:'index.php',
             method: 'POST',
-            data:{controllerName:'TableController', actionName:'actionAdd', add_class:add_class, add_fio:add_fio, add_money:add_money, add_birthday:add_birthday},
+            data:{qqq:'tableAdd', add_class:add_class, add_fio:add_fio, add_money:add_money, add_birthday:add_birthday},
             success: function (data)
             {
-                console.log(data);
+                alert(data);
             }
         })
-    }
-    return valid;
+    //}
+    //return valid;
 
 
 }
